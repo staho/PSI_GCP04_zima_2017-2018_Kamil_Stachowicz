@@ -1,12 +1,10 @@
 #!/usr/bin/python
 import random
 from math import exp
-from sigm import sigm
+from sigm import Sigm
 import numpy as np
 
 class Perceptron:
-    beta = 0.5
-
     def __init__(self, learning_rate, no_of_inputs, activation_function, activation_function_der):
         self.__dict__['_no_of_inputs'] = no_of_inputs
         self.__dict__['_weights'] = []

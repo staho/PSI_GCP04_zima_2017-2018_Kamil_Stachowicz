@@ -19,7 +19,7 @@ class SingleLayer:
             self._perceptrons.append(self._learningRate, self._noOfInputs, self._activationFunction, self._activationFunctionDer)
 
     def getPerceptron(self, index_of_perceptron):
-        if(index_of_perceptron < 0 || index_of_perceptron >= len(self._perceptrons)):
+        if(index_of_perceptron < 0 or index_of_perceptron >= len(self._perceptrons)):
             return None
         else:
             return self._perceptrons[index_of_perceptron]
