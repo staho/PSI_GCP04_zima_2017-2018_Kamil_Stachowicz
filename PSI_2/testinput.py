@@ -65,7 +65,7 @@ class TestInput():
                  ]
             self._desiredOutputs = [1, 1, 1]
             self._desiredForLast = 1
-        elif(letter == 'B'):
+        elif self._letterOfTest == 'B':
             self._testArguments = [
             1,  1,  1,  1,  0,
             1,  0,  0,  0,  1,
@@ -78,7 +78,7 @@ class TestInput():
             self._desiredOutputs = [1, 1, 1]
             self._desiredForLast = 1
 
-        elif(letter == 'C'):
+        elif self._letterOfTest == 'C':
             self._testArguments = [
              0, 1,  1,  1,  0,
             1,  0,  0,  0,  1,
@@ -91,7 +91,7 @@ class TestInput():
             self._desiredOutputs = [1, 1, 1]
             self._desiredForLast = 1
 
-        elif(letter == 'D'):
+        elif self._letterOfTest == 'D':
             self._testArguments = [
             1,  1,  1,  1,  0,
             1,  0,  0,  0,  1,

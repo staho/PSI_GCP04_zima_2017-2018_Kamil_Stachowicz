@@ -1,3 +1,4 @@
+import numpy as np
 class Sigm:
     def __call__(self, beta):
         def sigm(x):

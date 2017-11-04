@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from perceptron import Perceptron
+from testinput import TestInput
 
 class SingleLayer:
 
@@ -25,20 +26,21 @@ class SingleLayer:
 			return self._perceptrons[index_of_perceptron]
 
 	def trainPercpeptrons(self):
-		for inp in self._testInput:
-			perceptronCounter = 0
 
+		for inp in self._testInputs:
+			perceptronCounter = 0
+			print("Trained letter: ", inp._letterOfTest)
 			for perc in self._perceptrons:
 				perc.train(
-					self.inp._testArguments,
-					self.inp._desiredOutputs[perceptronCounter]
+					inp._testArguments,
+					inp._desiredOutputs[perceptronCounter]
 				)
 				perceptronCounter += 1
 
 	def makeTestInputs(self, no_of_tests):
 		x = 0
 		for i in range(0, no_of_tests):
-			self._testInputs.append(TestInput(availableLetters[x]))
+			self._testInputs.append(TestInput(self.availableLetters[x]))
 			x += 1
-			if x == len(availableLetters):
+			if x == len(self.availableLetters):
 				x = 0

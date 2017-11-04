@@ -10,3 +10,5 @@ if __name__ == '__main__':
 
     #def __init__(self, no_of_perceptrons, no_of_inputs, learning_rate, activation_function, activation_function_der):
     singleLayer = SingleLayer(3, 35, 0.5, activation_function, activation_function_der)
+    singleLayer.makeTestInputs(10)
+    singleLayer.trainPercpeptrons()
