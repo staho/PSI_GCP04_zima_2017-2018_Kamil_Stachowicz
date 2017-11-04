@@ -29,11 +29,11 @@ class SingleLayer:
 
         for perc in self._perceptrons:
             perc.train(
-                self._testInputs[i].testArguments,
-                self._testInputs[i].desiredOutputs[perceptron_counter]
+                self._testInputs[i]._testArguments,
+                self._testInputs[i]._desiredOutputs[perceptron_counter]
             )
             perceptron_counter += 1
-            if perceptron_counter == len(self.perceptrons)
+            if perceptron_counter == len(self._perceptrons)
             i += 1
             if i == len(self._testInputs):
                 i = 0
