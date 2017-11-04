@@ -5,16 +5,17 @@ from testinput import TestInput
 
 class SingleLayer:
 
-	availableLetters = ['a', 'b', 'o', 'A', 'B', 'C', 'D']
 
-	def __init__(self, no_of_perceptrons, no_of_inputs, learning_rate, activation_function, activation_function_der):
+	def __init__(self, no_of_layer, no_of_perceptrons, no_of_inputs, learning_rate, activation_function, activation_function_der):
 		self.__dict__['_perceptrons'] = []
 		self.__dict__['_testInputs'] = []
+		self.__dict__['_perceptronOutputs'] = []
 		self.__dict__['_activationFunction'] = activation_function
 		self.__dict__['_activationFunctionDer'] = activation_function_der
 		self.__dict__['_noOfInputs'] = no_of_inputs
 		self.__dict__['_learningRate'] = learning_rate
 		self.__dict__['_noOfPerceptrons'] = no_of_perceptrons
+		self.__dict__['_thisLayerNo'] = no_of_layer
 
 		for i in range(self._noOfPerceptrons):
 			self._perceptrons.append(Perceptron(self._learningRate, self._noOfInputs, self._activationFunction, self._activationFunctionDer))
@@ -25,22 +26,21 @@ class SingleLayer:
 		else:
 			return self._perceptrons[index_of_perceptron]
 
-	def trainPercpeptrons(self):
+	def trainPercpeptrons(self, inputs):
 
-		for inp in self._testInputs:
+		for inp in inputs:
 			perceptronCounter = 0
 			print("Trained letter: ", inp._letterOfTest)
 			for perc in self._perceptrons:
 				perc.train(
-					inp._testArguments,
-					inp._desiredOutputs[perceptronCounter]
+					inp._testArguments[self._thisLayerNo],
+					inp._testArguments[self._thisLayerNo + 1][perceptronCounter]
 				)
 				perceptronCounter += 1
 
-	def makeTestInputs(self, no_of_tests):
-		x = 0
-		for i in range(0, no_of_tests):
-			self._testInputs.append(TestInput(self.availableLetters[x]))
-			x += 1
-			if x == len(self.availableLetters):
-				x = 0
+	def guess(self, inputs):
+		self._perceptronOutputs = []
+		for perc in self._perceptrons:
+			self._perceptronOutputs.append(perc.guess(inputs))
+
+		return self._perceptronOutputs

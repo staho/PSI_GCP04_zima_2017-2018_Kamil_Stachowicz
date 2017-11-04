@@ -2,6 +2,7 @@
 import random
 from math import exp
 from sigm import Sigm
+from sign import Sign
 import numpy as np
 
 class Perceptron:
@@ -19,7 +20,7 @@ class Perceptron:
         for weight in range(0, self._no_of_inputs):
             self._weights.append(random.uniform(-1,1))
 
-        print("Learning rate = ", self._learningRate)
+        print("Learning rate = ", self._learningRate, "num of inputs: ", self._no_of_inputs)
 
 
     def guess(self, inputs):
@@ -29,10 +30,10 @@ class Perceptron:
 
         return self._activationFunction(self._sum)
 
-    def train(self, input, desiredOutput):
-        output = self.guess(input)
-        delta = (output - desiredOutput)
-
+    def train(self, inputs, desiredOutput):
+        output = self.guess(inputs)
+        delta = (desiredOutput - output)
+        print("train info: output: ", output,", desired: ", desiredOutput)
         self._error = delta * self._activationFunctionDer(self._sum)
 
         for i in range(len(self._inputs)):
