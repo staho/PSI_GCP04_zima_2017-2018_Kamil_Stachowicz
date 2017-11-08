@@ -29,7 +29,7 @@ class TestInput():
                  0,  1,  0,  1,  0,
                  0,  1,  1,  1,  1
                 ])
-            self._testArguments.append([ 0,  0,  0])
+            self._testArguments.append([ 0,  0,  1])
             self._testArguments.append([0])
 
         elif self._letterOfTest == 'b':

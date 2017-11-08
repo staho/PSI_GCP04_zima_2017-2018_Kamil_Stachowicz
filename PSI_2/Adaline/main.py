@@ -1,19 +1,11 @@
 import numpy as np
-from sigm import *
-from perceptron import *
+from adaline import *
 from testinput import *
 from singlelayer import *
-from sign import *
 from multilayer import *
 
 if __name__ == '__main__':
-    activation_function = Sigm()(1.0)
-    activation_function_der = Sigm().derivative(1.0)
-
-    activation_function1 = Sign()()
-    activation_function_der1 = Sign().derivative()
-
-    multiLayer = MultiLayer(35, [[activation_function, activation_function_der],[activation_function1, activation_function_der1]], [3,1], 0.5)
+    multiLayer = MultiLayer(35, [3,1], 0.05, Adaline.AdalineType.MAJORITY)
     for i in range(0, 100):
         multiLayer.trainNetwork(TestInput.makeTestInputs(10))
 
@@ -25,5 +17,3 @@ if __name__ == '__main__':
             print("Capital\n")
         else:
             print("Small\n")
-
-    
