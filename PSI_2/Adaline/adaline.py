@@ -51,7 +51,7 @@ class Adaline:
                 return 1
             else:
                 return -1
-        elif self._typeOfAdaline == Adaline.AdalineType.OR:
+        elif self._typeOfAdaline == Adaline.AdalineType.AND:
             if x >= (1 - self._noOfInputs) :
                 return 1
             else:

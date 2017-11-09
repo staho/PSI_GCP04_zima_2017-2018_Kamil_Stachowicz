@@ -8,7 +8,7 @@ class TestInput():
         5x7 table
     """
     #testArguments = []
-    availableLetters = ['a', 'b', 'o', 'A', 'B', 'C', 'D']
+    availableLetters = ['a', 'b', 'o', 'A', 'B', 'C', 'D', 'I']
     def __init__(self, letter):
         self.__dict__['_testArguments'] = []
         #self.__dict__['_desiredOutputs'] = []
@@ -105,6 +105,30 @@ class TestInput():
             1,  1,  1,  1,  -1,
             ])
             self._testArguments.append([1,  1,  1])
+            self._testArguments.append([1])
+        elif self._letterOfTest == 'I':
+            self._testArguments.append([
+            -1,  -1,  1,  -1,  -1,
+            -1,  -1,  1,  -1,  -1,
+            -1,  -1,  1,  -1,  -1,
+            -1,  -1,  1,  -1,  -1,
+            -1,  -1,  1,  -1,  -1,
+            -1,  -1,  1,  -1,  -1,
+            -1,  -1,  1,  -1,  -1,
+            ])
+            self._testArguments.append([-1,  1,  -1])
+            self._testArguments.append([1])
+        elif self._letterOfTest == 'F':
+            self._testArguments.append([
+            1, 1, 1, 1, 1,
+            1, -1, -1, -1, -1,
+            1, -1, -1, -1, -1,
+            1, 1, 1, 1, -1,
+            1, -1, -1, -1, -1,
+            1, -1, -1, -1, -1,
+            1, -1, -1, -1, -1,
+            ])
+            self._testArguments.append([1,  1,  -1])
             self._testArguments.append([1])
 
     def makeTestInputs(no_of_tests):

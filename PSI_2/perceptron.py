@@ -20,8 +20,6 @@ class Perceptron:
         for weight in range(0, self._no_of_inputs):
             self._weights.append(random.uniform(-1,1))
 
-        print("Learning rate = ", self._learningRate, "num of inputs: ", self._no_of_inputs)
-
 
     def guess(self, inputs):
         self._inputs = inputs
@@ -33,10 +31,12 @@ class Perceptron:
     def train(self, inputs, desiredOutput):
         output = self.guess(inputs)
         delta = (desiredOutput - output)
-        print("Train info: output: ",output,", desired: ",desiredOutput)
+        #print(";",output,";",desiredOutput,";",end='')
         self._error = delta * self._activationFunctionDer(self._sum)
 
         for i in range(len(self._inputs)):
             self._weights[i] += self._error * self._inputs[i] * self._learningRate
 
         self._bias = self._learningRate * self._error
+
+        return output

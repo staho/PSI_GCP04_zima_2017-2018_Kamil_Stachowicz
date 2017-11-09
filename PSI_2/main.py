@@ -13,17 +13,18 @@ if __name__ == '__main__':
     activation_function1 = Sign()()
     activation_function_der1 = Sign().derivative()
 
-    multiLayer = MultiLayer(35, [[activation_function, activation_function_der],[activation_function1, activation_function_der1]], [3,1], 0.5)
-    for i in range(0, 100):
-        multiLayer.trainNetwork(TestInput.makeTestInputs(10))
+    tabOfLR = [0.01, 0.05, 0.1, 0.5]
+    for lr in tabOfLR:
+        print("LearningRate;",lr,';')
+        multiLayer = MultiLayer(35, [[activation_function, activation_function_der],[activation_function1, activation_function_der1]], [3,1], lr)
 
-    toGuess = TestInput.makeTestInputs(10)
-    for inputs in toGuess:
-        print("Letter: ", inputs._letterOfTest)
-        x = multiLayer.guess(inputs._testArguments[0])
-        if x[0] == 1:
-            print("Capital\n")
-        else:
-            print("Small\n")
+        multiLayer.trainNetwork(TestInput.makeTestInputs(17))
 
-    
+        toGuess = TestInput.makeTestInputs(17)
+        for inputs in toGuess:
+            print("Letter;",inputs._letterOfTest,end='')
+            x = multiLayer.guess(inputs._testArguments[0])
+            if x[0] == 1:
+                print(";1;")
+            else:
+                print(";0;")
