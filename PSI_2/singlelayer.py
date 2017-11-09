@@ -47,8 +47,6 @@ class SingleLayer:
 			for inp in inputs:
 				perceptronCounter = 0
 
-				#if(self._thisLayerNo == 0):
-					#print(";letter:;",inp._letterOfTest,end='')
 				outputs = []
 				for perc in self._perceptrons:
 					outputs.append(perc.train(

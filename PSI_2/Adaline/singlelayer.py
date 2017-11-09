@@ -26,16 +26,36 @@ class SingleLayer:
 			return self._perceptrons[index_of_perceptron]
 
 	def trainPercpeptrons(self, inputs):
+		if(self._thisLayerNo != 0):
+			for x in range(0, 200):
+				for inp in inputs:
+					perceptronCounter = 0
 
-		for inp in inputs:
-			perceptronCounter = 0
-			print("Trained letter: ", inp._letterOfTest)
-			for perc in self._perceptrons:
-				perc.train(
-					inp._testArguments[self._thisLayerNo],
-					inp._testArguments[self._thisLayerNo + 1][perceptronCounter]
-				)
-				perceptronCounter += 1
+					for perc in self._perceptrons:
+						perc.train(
+							inp._testArguments[self._thisLayerNo],
+							inp._testArguments[self._thisLayerNo + 1][perceptronCounter]
+						)
+						perceptronCounter += 1
+
+		mse = 1;
+		epoch = 0
+		while(mse > 0.001):
+			epoch += 1
+			print("Epoch;",epoch,";",end='')
+			for inp in inputs:
+				perceptronCounter = 0
+
+				outputs = []
+				for perc in self._perceptrons:
+					outputs.append(perc.train(
+						inp._testArguments[self._thisLayerNo],
+						inp._testArguments[self._thisLayerNo + 1][perceptronCounter]
+					))
+					perceptronCounter += 1
+				mse += self.MSE(outputs,inp._testArguments[self._thisLayerNo + 1])
+			mse = mse/len(inputs)
+			print("MSE;",mse,";")
 
 	def guess(self, inputs):
 		self._perceptronOutputs = []
@@ -43,3 +63,9 @@ class SingleLayer:
 			self._perceptronOutputs.append(perc.guess(inputs))
 
 		return self._perceptronOutputs
+
+	def MSE(self, result, expected):
+		sum = 0
+		for i in range(len(result)):
+			sum += (result[i] - expected[i])**2
+		return sum
