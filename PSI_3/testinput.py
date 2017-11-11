@@ -1,22 +1,30 @@
 #!/usr/bin/python
-
+from equation import *
 
 class TestInput():
-    """docstring forTestInput."""
     """
-        Test input is a vector which represents emojis like as in
-        8x8 table
+        Test input is a table of 2 vars and desired output from Rastrign 3D function
     """
-    availableEmojis = []
     def __init__(self):
-        self.__dict__['_testArguments'] = []
+        self.__dict__['_inputData'] = []
+        self.__dict__['_outputData'] = []
+        #self.__dict__['_output'] = 1
 
-    def makeTestInputs(no_of_tests):
-        testInputsArray = []
-        x = 0
-        for i in range(0, no_of_tests):
-            testInputsArray.append(TestInput(TestInput.availableEmojis[x]))
-            x += 1
-            if x == len(TestInput.availableEmojis):
-                x = 0
-        return testInputsArray
+    def makeTestInputs(self, dif):
+        i = -2
+        j = -2
+        while i <= 2:
+            while j <= 2:
+                self._inputData.append([i, j])
+                j += dif
+            j = 0
+            i += dif
+
+        for data in self._inputData:
+            self._outputData.append(Equation.getValue(data[0], data[1]))
+
+    def getInputData(self):
+        return self._inputData
+
+    def getOutputData(self):
+        return self._outputData

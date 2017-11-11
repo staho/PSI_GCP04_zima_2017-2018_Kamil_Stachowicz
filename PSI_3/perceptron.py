@@ -2,7 +2,6 @@
 import random
 from math import exp
 from sigm import Sigm
-from sign import Sign
 import numpy as np
 
 class Perceptron:
@@ -30,12 +29,13 @@ class Perceptron:
 
     def train(self, inputs, desiredOutput):
         output = self.guess(inputs)
-        delta = (desiredOutput - output)
-        self._error = delta * self._activationFunctionDer(self._sum)
-
-        for i in range(len(self._inputs)):
-            self._weights[i] += self._error * self._inputs[i] * self._learningRate
-
-        self._bias = self._learningRate * self._error
 
         return output
+
+    def getWeight(self, index):
+        return self._weights[index]
+
+    def updateWeights(self, error):
+        self._error = error
+        for i in range(len(self._inputs)):
+            self._weights[i] += self._error * self._inputs[i] * self._learningRate * self._activationFunctionDer(self._sum)
