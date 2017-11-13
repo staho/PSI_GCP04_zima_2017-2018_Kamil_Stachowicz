@@ -19,7 +19,6 @@ class Perceptron:
         for weight in range(0, self._no_of_inputs):
             self._weights.append(random.uniform(-1,1))
 
-
     def guess(self, inputs):
         self._inputs = inputs
 
@@ -37,5 +36,6 @@ class Perceptron:
 
     def updateWeights(self, error):
         self._error = error
+        weightConst = self._error * self._learningRate * self._activationFunctionDer(self._sum)
         for i in range(len(self._inputs)):
-            self._weights[i] += self._error * self._inputs[i] * self._learningRate * self._activationFunctionDer(self._sum)
+            self._weights[i] += self._inputs[i] * weightConst
