@@ -28,13 +28,16 @@ model.compile(loss='mean_squared_error', optimizer=adam, metrics=['accuracy'])
 model.fit(testDataInput, testDataExpectedOutput, epochs=1000, batch_size=20)
 
 validationData = TestInput()
-validationData.makeTestInputs(0.05)
+validationData.makeTestInputs(0.5)
 valDataInput = validationData.getInputData()
 valDataOutput = validationData.getOutputData()
-
 
 scores=model.evaluate(valDataInput, valDataOutput)
 
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
 print(model.summary())
+
+yhat = model.predict(valDataInput, verbose=0)
+for i in range(0, len(yhat)):
+    print("x1:", valDataInput[i][0], "x2:", valDataInput[i][1], "y from network:", yhat[i], "from data:", valDataOutput[i])
