@@ -82,6 +82,8 @@ class MultiLayer():
 			mse /= inputDataLen
 			#if epoch % 10 == 0:
 			print("Epoch: ", epoch, " mse: ", mse)
+			if epoch % 10 == 0:
+				print("Guessing x:", inputData[0][0], " x2: ", inputData[0][1], " wynik: ", self.guess(inputData[0]), "spodziewany: ", desiredOutput[0])
 
 
 	def guess(self, inputs):
