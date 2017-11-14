@@ -1,6 +1,7 @@
 from keras.models import Sequential
 from keras.layers import Dense
 from keras import optimizers
+from prettytable import PrettyTable
 from testinput import *
 
 testData = TestInput()
@@ -25,7 +26,7 @@ adam = optimizers.Adam(lr=lr, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=dec
 
 model.compile(loss='mean_squared_error', optimizer=adam, metrics=['accuracy'])
 
-model.fit(testDataInput, testDataExpectedOutput, epochs=1000, batch_size=20)
+model.fit(testDataInput, testDataExpectedOutput, epochs=1, batch_size=20)
 
 validationData = TestInput()
 validationData.makeTestInputs(0.5)
@@ -39,5 +40,8 @@ print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 print(model.summary())
 
 yhat = model.predict(valDataInput, verbose=0)
+t = PrettyTable()
+t.field_names = ['x1', 'x2', 'PREDICTED', 'EXPECTED']
 for i in range(0, len(yhat)):
-    print("x1:", valDataInput[i][0], "x2:", valDataInput[i][1], "y from network:", yhat[i], "from data:", valDataOutput[i])
+    t.add_row([valDataInput[i][0], valDataInput[i][1], yhat[i][0], valDataOutput[i]])
+print(t)
