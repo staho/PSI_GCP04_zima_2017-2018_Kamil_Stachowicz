@@ -50,7 +50,7 @@ class MultiLayer():
 		epoch = 0
 		inputDataLen = len(inputData)
 		print("Data length:", inputDataLen)
-		while mse > 0.5:
+		while mse > 0.2:
 			mse = 0
 			epoch += 1
 			for counter in range(0, len(inputData)):
@@ -82,8 +82,8 @@ class MultiLayer():
 			mse /= inputDataLen
 			#if epoch % 10 == 0:
 			print("Epoch: ", epoch, " mse: ", mse)
-			if epoch % 10 == 0:
-				print("Guessing x:", inputData[0][0], " x2: ", inputData[0][1], " wynik: ", self.guess(inputData[0]), "spodziewany: ", desiredOutput[0])
+			#if epoch % 10 == 0:
+				#print("Guessing x:", inputData[0][0], " x2: ", inputData[0][1], " wynik: ", self.guess(inputData[0]), "spodziewany: ", desiredOutput[0])
 
 
 	def guess(self, inputs):
