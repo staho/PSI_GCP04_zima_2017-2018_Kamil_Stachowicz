@@ -20,8 +20,8 @@ valDataOutput = validationData.getOutputData()
 
 
 """Network params"""
-layers = [30, 30, 10, 1]
-lr = 0.01
+layers = [30, 30, 1]
+lr = 0.001
 decay = 0
 
 log_dir = "./logs-lr" + str(lr) + "-lay"
@@ -31,7 +31,7 @@ for lay in layers:
 """Initiation of tensorBoard"""
 tensorBoard = TensorBoard(  log_dir=log_dir,
                             histogram_freq=5,
-                            batch_size=20,
+                            batch_size=100,
                             write_graph=True,
                             write_grads=False,
                             write_images=False,
@@ -58,7 +58,7 @@ model.compile(loss='mean_squared_error', optimizer=adam, metrics=['accuracy'])
 """Training network"""
 model.fit(  testDataInput,
             testDataExpectedOutput,
-            epochs=100000,
+            epochs=10000,
             batch_size=20,
             validation_data=(valDataInput, valDataOutput),
             callbacks=[tensorBoard]

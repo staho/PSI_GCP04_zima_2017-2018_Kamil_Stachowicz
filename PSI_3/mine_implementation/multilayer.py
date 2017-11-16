@@ -50,7 +50,7 @@ class MultiLayer():
 		epoch = 0
 		inputDataLen = len(inputData)
 		print("Data length:", inputDataLen)
-		while mse > 0.2:
+		while epoch < 1000:
 			mse = 0
 			epoch += 1
 			for counter in range(0, len(inputData)):
