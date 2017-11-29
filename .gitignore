@@ -8,3 +8,5 @@ PSI_2/Adaline/test.txt
 PSI_2/Adaline/__pycache__/testinput.cpython-36.pyc
 
 PSI_2/Adaline/__pycache__/adaline.cpython-36.pyc
+
+*.xcf
