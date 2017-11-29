@@ -15,7 +15,7 @@ if __name__ == '__main__':
     activation_function2_der = Linear().derivative(1.0)
 
     test = TestInput()
-    test.makeTestInputsRandom(10000)
+    test.makeTestInputsRandom(1000)
 
 
     multilayer = MultiLayer(2,     [[activation_function, activation_function_der],
