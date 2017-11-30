@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     hebbMultiLayer = MultiLayer(64, [1], 
                         [[activation_function, activation_function_der]], 0.01, 0.003)
-    for i in range(0, 1000):
+    for i in range(0, 10000):
         for key in testInputMap.keys():
             if i % 10 == 0:
                 print("Key:", key, end='')
