@@ -1,8 +1,8 @@
 import Neuron
 import SingleLayer
-import TestInput
-import sigm
-import sign
+from TestInput import *
+from sign import *
+from sigm import *
 
 if __name__ == '__main__':
     activation_function = Sigm()(1.0)
@@ -11,5 +11,7 @@ if __name__ == '__main__':
     activation_function1 = Sign()()
     activation_function_der1 = Sign().derivative()
 
-    
+    testInput = TestInput()
+    testInputMap = testInput.getInputsMap()
+
     

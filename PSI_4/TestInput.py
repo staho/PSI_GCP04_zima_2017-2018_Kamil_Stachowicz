@@ -3,13 +3,13 @@ class TestInput():
     avaliableEmojis = ["|", "D", "sad", "wrr", "xD"]
 
     def __init__(self):
+        self.inputsMap = {}
         self.makeInputs()
-        self.inputsTab = []
 
     def makeInputs(self):
-        for emoji in avaliableEmojis:
+        for emoji in TestInput.avaliableEmojis:
             if emoji == "|":
-                self.inputsTab.append([
+                self.inputsMap["|"]=[
                     0,0,0,0,0,0,0,0,
                     0,0,1,0,0,1,0,0,
                     0,0,0,0,0,0,0,0,
@@ -18,9 +18,9 @@ class TestInput():
                     0,1,1,1,1,1,1,0,
                     0,0,0,0,0,0,0,0,
                     0,0,0,0,0,0,0,0,
-                    ])
+                    ]
             if emoji == "D":
-                 self.inputsTab.append([
+                 self.inputsMap["D"] = [
                     0,0,0,0,0,0,0,0,
                     0,0,1,0,0,1,0,0,
                     0,0,0,0,0,0,0,0,
@@ -29,9 +29,9 @@ class TestInput():
                     0,1,0,0,0,0,1,0,
                     0,0,1,1,1,1,0,0,
                     0,0,0,0,0,0,0,0,
-                    ])
+                    ]
             if emoji == "sad":
-                 self.inputsTab.append([
+                 self.inputsMap["sad"] = [
                     0,0,0,0,0,0,0,0,
                     0,0,1,0,0,1,0,0,
                     0,0,0,0,0,0,0,0,
@@ -40,9 +40,9 @@ class TestInput():
                     0,1,0,0,0,0,1,0,
                     0,1,0,0,0,0,1,0,
                     0,0,0,0,0,0,0,0,
-                    ])
+                    ]
             if emoji == "wrr":
-                 self.inputsTab.append([
+                 self.inputsMap["wrr"] = [
                     0,0,0,0,0,0,0,0,
                     0,0,1,0,0,1,0,0,
                     0,0,0,0,0,0,0,0,
@@ -51,9 +51,9 @@ class TestInput():
                     0,1,0,0,0,0,1,0,
                     0,1,0,0,0,0,1,0,
                     0,0,0,0,0,0,0,0,
-                    ])
+                    ]
             if emoji == "xD":
-                 self.inputsTab.append([
+                 self.inputsMap["xD"] = [
                     0,0,1,0,0,1,0,0,
                     0,0,0,1,1,0,0,0,
                     0,0,1,0,0,1,0,0,
@@ -62,4 +62,7 @@ class TestInput():
                     0,1,0,0,0,0,1,0,
                     0,0,1,1,1,1,0,0,
                     0,0,0,0,0,0,0,0,
-                    ])
+                    ]
+
+    def getInputsMap(self):
+        return self.inputsMap

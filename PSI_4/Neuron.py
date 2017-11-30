@@ -30,13 +30,13 @@ class Neuron:
 
         return self._activationFunction(self._sum)
 
-    def trainWithSupervisor(self, inputs, desiredOutput):  //∂wij(k+1) = (1-fr)*∂wij(k) + lr*yj*yi (yj to wejście nr j) yi to oczekiwane wyjscie
+    def trainWithSupervisor(self, inputs, desiredOutput):  #∂wij(k+1) = (1-fr)*∂wij(k) + lr*yj*yi (yj to wejście nr j) yi to oczekiwane wyjscie
         output = self.guess(inputs)
 
         for i in range(len(self._inputs)):           
             self._weights[i] == (1-self._forgetRate) * self._weights[i] + self._learningRate * self._inputs[i] * desiredOutput
 
-    def trainWithoutSupervisor(self, inputs): //∂wij(k+1) = (1-fr)*∂wij(k) + lr*yj*yi (yj to wejście nr j) yi to wyjście neuronu
+    def trainWithoutSupervisor(self, inputs): #∂wij(k+1) = (1-fr)*∂wij(k) + lr*yj*yi (yj to wejście nr j) yi to wyjście neuronu
         output = self.guess(inputs)
 
         for i in range(len(self._inputs)):           
