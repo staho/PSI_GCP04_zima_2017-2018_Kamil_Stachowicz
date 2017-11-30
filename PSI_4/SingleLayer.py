@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from Neuron import *
-import TestInput
+import testinput
 
 class SingleLayer:
 

@@ -9,8 +9,7 @@ class MultiLayer():
     def __init__(   self,
                     no_of_inputs_first_layer,
                     array_of_number_of_perceptrons,
-                    array_of_activation_functions,
-                    array_of_number_of_perceptrons, 
+                    array_of_activation_functions, 
                     learning_rate,
                     forgetRate
                     ):
@@ -35,6 +34,7 @@ class MultiLayer():
                     self._numberOfPerceptronsArray[i],
                     self._noFirstLayerInputs,
                     self._learningRate,
+                    self._forgetRate,
                     self._arrayOfActivationFunctions[i][0],
                     self._arrayOfActivationFunctions[i][1]
                 ))
@@ -45,8 +45,9 @@ class MultiLayer():
                     self._numberOfPerceptronsArray[i-1],    #that's beacouse next layer will have such many inputs as prev layer had outputs
                                                             #it's BAD beacuse hidden layer can also have their independent inputs, but for now it's a quick solution
                     self._learningRate,
+                    self._forgetRate,
                     self._arrayOfActivationFunctions[i][0],
-                    self._arrayOfActivationFunctions[i][1]
+                    self._arrayOfActivationFunctions[i][1],
                 ))
 
     def trainNetwork(self, inputs):
@@ -54,7 +55,7 @@ class MultiLayer():
 
         for layer in self._perceptronLayersArray:
             prevOutput = layer.guess(prevOutput)
-
+        return prevOutput
 
     def guess(self, inputs):
         tempOutput = inputs
