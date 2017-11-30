@@ -40,6 +40,6 @@ class Neuron:
         output = self.guess(inputs)
 
         for i in range(len(self._inputs)):           
-            self._weights[i] == (1-self._forgetRate) * self._weights[i] + self._learningRate * self._inputs[i] * output
+            self._weights[i] = (1-self._forgetRate) * self._weights[i] + self._learningRate * self._inputs[i] * output
         
         return output
