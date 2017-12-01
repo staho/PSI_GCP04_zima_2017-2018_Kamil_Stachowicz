@@ -3,11 +3,14 @@ import SingleLayer
 from testinput import *
 from sign import *
 from sigm import *
+from signsigm import *
 from MultiLayer import *
+import numpy as np
+np.random.seed(7)
 
 if __name__ == '__main__':
-    activation_function = Sigm()(1.0)
-    activation_function_der = Sigm().derivative(1.0)
+    activation_function = SignSigm()(1.0)
+    activation_function_der = SignSigm().derivative(1.0)
 
     activation_function1 = Sign()()
     activation_function_der1 = Sign().derivative()
@@ -15,8 +18,8 @@ if __name__ == '__main__':
     testInput = TestInput()
     testInputMap = testInput.getInputsMap()
 
-    epochCnt = 10000
-    hebbMultiLayer = MultiLayer(64, [1], [[activation_function, activation_function_der]], 0.01, 0)
+    epochCnt = 1000
+    hebbMultiLayer = MultiLayer(64, [1], [[activation_function, activation_function_der]], 0.007, 0.1)
     for i in range(0, epochCnt):
         for key in testInputMap.keys():
             if i % 100 == 0:

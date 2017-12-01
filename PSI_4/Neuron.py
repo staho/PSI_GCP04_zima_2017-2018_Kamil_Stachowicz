@@ -4,6 +4,7 @@ from math import exp
 from sigm import Sigm
 from sign import Sign
 import numpy as np
+np.random.seed(7)
 
 class Neuron:
     def __init__(self, learning_rate, no_of_inputs, activation_function, activation_function_der, forgetRate):
@@ -19,7 +20,7 @@ class Neuron:
         self.__dict__['_error'] = None
 
         for weight in range(0, self._no_of_inputs):
-            self._weights.append(random.uniform(-1,1))
+            self._weights.append(np.random.uniform(-1,1))
         if self._forgetRate == None:
             self._forgetRate = 0
 
