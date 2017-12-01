@@ -15,12 +15,12 @@ if __name__ == '__main__':
     testInput = TestInput()
     testInputMap = testInput.getInputsMap()
 
-    hebbMultiLayer = MultiLayer(64, [1], 
-                        [[activation_function, activation_function_der]], 0.01, 0.003)
-    for i in range(0, 10000):
+    epochCnt = 10000
+    hebbMultiLayer = MultiLayer(64, [1], [[activation_function, activation_function_der]], 0.01, 0)
+    for i in range(0, epochCnt):
         for key in testInputMap.keys():
-            if i % 10 == 0:
+            if i % 100 == 0:
                 print("Key:", key, end='')
-                print(" = ", hebbMultiLayer.trainNetwork(testInputMap[key]))
-        if i % 10 == 0:
+                print(" =", hebbMultiLayer.trainNetwork(testInputMap[key]))
+        if i % 100 == 0:
             print()

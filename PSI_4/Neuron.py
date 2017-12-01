@@ -13,7 +13,7 @@ class Neuron:
         self.__dict__['_learningRate'] = learning_rate
         self.__dict__['_activationFunction'] = activation_function
         self.__dict__['_activationFunctionDer'] = activation_function_der
-        self.__dict__['_bias'] = 1
+        self.__dict__['_bias'] = -0.5
         self.__dict__['_forgetRate'] = forgetRate
         self.__dict__['_sum'] = None
         self.__dict__['_error'] = None
@@ -39,7 +39,9 @@ class Neuron:
     def trainWithoutSupervisor(self, inputs): #∂wij(k+1) = (1-fr)*∂wij(k) + lr*yj*yi (yj to wejście nr j) yi to wyjście neuronu
         output = self.guess(inputs)
 
+        constant = self._learningRate * output
+        forget = (1-self._forgetRate)
         for i in range(len(self._inputs)):           
-            self._weights[i] = (1-self._forgetRate) * self._weights[i] + self._learningRate * self._inputs[i] * output
+            self._weights[i] =  forget * self._weights[i] + constant * self._inputs[i]
         
         return output
