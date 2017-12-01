@@ -18,7 +18,7 @@ if __name__ == '__main__':
     testInput = TestInput()
     testInputMap = testInput.getInputsMap()
 
-    epochCnt = 1000
+    epochCnt = 10000
     hebbMultiLayer = MultiLayer(64, [1], [[activation_function, activation_function_der]], 0.007, 0.1)
     for i in range(0, epochCnt):
         for key in testInputMap.keys():
@@ -27,3 +27,13 @@ if __name__ == '__main__':
                 print(" =", hebbMultiLayer.trainNetwork(testInputMap[key]))
         if i % 100 == 0:
             print()
+
+    #epochCnt = 10000
+    #hebbMultiLayer = Neuron(0.007, 64, activation_function, activation_function_der, 0.1)
+    #for i in range(0, epochCnt):
+    #    for key in testInputMap.keys():
+    #        if i % 100 == 0:
+    #            print("Key:", key, end='')
+    #            print(" =", hebbMultiLayer.trainWithoutSupervisor(testInputMap[key]))
+    #    if i % 100 == 0:
+    #        print()

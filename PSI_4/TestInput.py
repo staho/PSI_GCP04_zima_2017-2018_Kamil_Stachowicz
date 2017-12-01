@@ -1,6 +1,6 @@
 
 class TestInput():
-    avaliableEmojis = ["|", "D", "sad", "wrr", "xD", "test"]
+    avaliableEmojis = ["sad","D","wrr","xD", "|", "test"]
 
     def __init__(self):
         self.inputsMap = {}
