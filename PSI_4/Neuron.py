@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import random
 from math import exp
 from sigm import Sigm
@@ -45,7 +44,7 @@ class Neuron:
         constant = self._learningRate * output
         forget = (1-self._forgetRate)
         for i in range(len(self._inputs)):           
-            self._weights[i] *= forget * self._weights[i]
+            self._weights[i] *= forget
             self._weights[i] += constant * self._inputs[i]
         
         return output
