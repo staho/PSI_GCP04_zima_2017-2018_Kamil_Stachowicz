@@ -28,7 +28,7 @@ class NeuronKohonen:
     def train(self):
 
         for i in range(len(self._inputs)):
-            self._weights[i] += self._learningRate * self._sum * (self._inputs[i] - self._weights[i])
+            self._weights[i] += self._learningRate * (self._inputs[i] - self._weights[i])
 
     def getWeightsAsString(self):
         return str(self._weights)
