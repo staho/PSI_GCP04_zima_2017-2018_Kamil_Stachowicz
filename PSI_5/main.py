@@ -13,14 +13,14 @@ if __name__ == '__main__':
     noOfInputs = 4
     
     grid = Grid(noOfInputs, learningRate, 10, 10)
-    grid1 = Grid(noOfInputs, learningRate, 10, 10)
-    grid2 = Grid(noOfInputs, learningRate, 10, 10)
-    
-    for i in range(10000):
-        winner = grid.train(inputs.getInputData(0)[1])
-        winner1 = grid1.train(inputs.getInputData(1)[1])
-        winner2 = grid2.train(inputs.getInputData(2)[1])
 
-    print(specie + " " + winner.getWeightsAsString())
-    print(specie1 + " " + winner1.getWeightsAsString())
-    print(specie2 + " " + winner2.getWeightsAsString())
+    winner = [None, None, None]
+
+    for j in range(3):
+        for i in range(10000):
+            winner[j] = grid.train(inputs.getInputData(j)[1])
+        grid.resetNeurons()
+
+    print(specie + " " + winner[0].getWeightsAsString())
+    print(specie1 + " " + winner[1].getWeightsAsString())
+    print(specie2 + " " + winner[2].getWeightsAsString())
