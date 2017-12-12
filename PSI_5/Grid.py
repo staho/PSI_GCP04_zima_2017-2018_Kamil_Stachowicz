@@ -1,6 +1,6 @@
-import NeuronKohonen as nk
+from NeuronKohonen import *
 
-"""Class for Kohonen network""""
+"""Class for Kohonen network"""
 class Grid:
     def __init__(self, noOfInputs, learningRate, height, width):
         self.__dict__['_noOfInputs'] = noOfInputs
@@ -20,8 +20,9 @@ class Grid:
                 if tmp > highestOutput:
                     highestOutput = tmp
                     winner = (i, j)
-        
-        self._neurons[winner[0]][winner[j]].train()
+
+        print("Winner: " + str(winner))
+        self._neurons[winner[0]][winner[1]].train()
     
     def guess(self, inputs):
         for i in range(self._height):
