@@ -1,4 +1,7 @@
 from NeuronKohonen import *
+import numpy as np
+from scipy import linalg, mat, dot
+
 
 """Class for Kohonen network"""
 class Grid:
@@ -16,7 +19,7 @@ class Grid:
         for i in range(self._height):
             for j in range(self._width):
                 
-                tmp = self._neurons[i][j].guess(inputs)
+                tmp = self._neurons[i][j].guess(inputs) * self.calculateCos(inputs, self._neurons[i][j]._weights)
                 if tmp > highestOutput:
                     highestOutput = tmp
                     winner = (i, j)
@@ -41,3 +44,9 @@ class Grid:
             for j in range(self._width):
                 self._neurons[i][j].resetNeuron()
         
+    def calculateCos(self, v1, v2):
+        v1 = mat(v1)
+        v2 = mat(v2)
+
+        c = dot(v1, v2.T)/(linalg.norm(v1)*linalg.norm(v2))
+        return c
