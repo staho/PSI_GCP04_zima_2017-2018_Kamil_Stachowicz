@@ -21,8 +21,10 @@ class Grid:
                     highestOutput = tmp
                     winner = (i, j)
 
-        print("Winner: " + str(winner))
+        #print("Winner: " + str(winner))
         self._neurons[winner[0]][winner[1]].train()
+        
+        return self._neurons[winner[0]][winner[1]]
     
     def guess(self, inputs):
         for i in range(self._height):
