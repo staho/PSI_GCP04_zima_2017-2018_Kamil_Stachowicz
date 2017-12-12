@@ -23,3 +23,13 @@ class Grid:
         
         self._neurons[winner[0]][winner[j]].train()
     
+    def guess(self, inputs):
+        for i in range(self._height):
+            for j in range(self._width):
+                
+                tmp = self._neurons[i][j].guess(inputs)
+                if tmp > highestOutput:
+                    highestOutput = tmp
+        
+        return highestOutput
+        
