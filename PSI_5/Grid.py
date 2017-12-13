@@ -10,15 +10,15 @@ class Grid:
         self.__dict__['_neurons'] = [[NeuronKohonen(self._learningRate, self._noOfInputs) for x in range(self._width)] for y in range(self._height) ]
 
     def train(self, inputs):
-        highestOutput = 0
+        lowestOutput = 10
         winner = (0,0)
 
         for i in range(self._height):
             for j in range(self._width):
                 
                 tmp = self._neurons[i][j].guess(inputs)
-                if tmp > highestOutput:
-                    highestOutput = tmp
+                if tmp < lowestOutput:
+                    lowestOutput = tmp
                     winner = (i, j)
 
         #print("Winner: " + str(winner))

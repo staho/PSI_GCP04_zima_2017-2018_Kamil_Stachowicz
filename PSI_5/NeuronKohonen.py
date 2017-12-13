@@ -1,5 +1,6 @@
 import random
 import numpy as np
+import math
 
 class NeuronKohonen:
     def __init__(self, learning_rate, no_of_inputs):
@@ -21,12 +22,13 @@ class NeuronKohonen:
         self._sum = 0
 
         for i in range(len(self._weights)):
-            self._sum += self._inputs[i] * self._weights[i]
-        
+            self._sum += (self._inputs[i] - self._weights[i])**2
+        #    self._sum += self._inputs[i] * self._weights[i]
+        self._sum = math.sqrt(self._sum)
+
         return self._sum
 
     def train(self):
-
         for i in range(len(self._inputs)):
             self._weights[i] += self._learningRate * (self._inputs[i] - self._weights[i])
 
