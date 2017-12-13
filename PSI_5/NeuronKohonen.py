@@ -12,7 +12,7 @@ class NeuronKohonen:
         self.__dict__['_weightsStart'] = []
 
         for i in range(self._no_of_inputs):
-            weight = random.uniform(0,8)
+            weight = random.uniform(0,1)
             self._weights.append(weight)
             self._weightsStart.append(weight)
 

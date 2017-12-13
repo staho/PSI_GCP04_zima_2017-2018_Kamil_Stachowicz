@@ -9,7 +9,7 @@ if __name__ == '__main__':
     specie1 = inputs.getInputData(1)[0]
     specie2 = inputs.getInputData(2)[0]
     
-    learningRate = 0.01
+    learningRate = 0.001
     noOfInputs = 4
     
     grid = Grid(noOfInputs, learningRate, 10, 10)
@@ -29,3 +29,8 @@ if __name__ == '__main__':
     #Iris-setosa [5.01, 3.42, 1.47, 0.25]
     #Iris-versicolor [5.94, 2.78, 4.26, 1.33]
     #Iris-virginica [6.59, 2.98, 5.56, 2.03]
+
+    #averages:
+    #[0.81, 0.55, 0.24, 0.04]
+    #[0.75, 0.35, 0.54, 0.17]
+    #[0.71, 0.32, 0.6, 0.22]
