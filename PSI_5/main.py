@@ -12,12 +12,12 @@ if __name__ == '__main__':
     learningRate = 0.001
     noOfInputs = 4
     
-    grid = Grid(noOfInputs, learningRate, 10, 10)
+    grid = Grid(noOfInputs, learningRate, 20, 20)
 
     winner = [None, None, None]
 
     for j in range(3):
-        for i in range(10000):
+        for i in range(1000):
             winner[j] = grid.train(inputs.getInputData(j)[1])
         grid.resetNeurons()
 
