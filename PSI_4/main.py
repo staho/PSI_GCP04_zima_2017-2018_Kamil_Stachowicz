@@ -5,7 +5,6 @@ from testinput import *
 from signsigm import *
 import numpy as np
 import copy
-np.random.seed(7)
 
 def drawEmoji(emoji):
     for i in range(8):
@@ -24,8 +23,9 @@ def noiseEmoji(emoji, numOfNoisePixels):
             
 
 if __name__ == '__main__':
-    learning_rate = 0.007
-    forget_rate = 0.472
+    learning_rate = 0.1
+    forget_rate = 0.04
+    num_of_neurons = 16
     activation_function = Linear()()
 
 
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     noisedInputMap = {}
     
     for key in testInputMap.keys():
-        noisedInputMap[key] = noiseEmoji(testInputMap[key], 2)
+        noisedInputMap[key] = noiseEmoji(testInputMap[key], 1)
 
     for key in testInputMap.keys():
         print(str(key))
@@ -43,9 +43,9 @@ if __name__ == '__main__':
         drawEmoji(noisedInputMap[key])
     
     epochCnt = 1000
-    neuronGroup = HebbGroup(learning_rate, 100, 64, forget_rate, activation_function)
+    neuronGroup = HebbGroup(learning_rate, num_of_neurons, 64, forget_rate, activation_function)
 
-    winners = []
+    winnersTrain = []
     for key in testInputMap.keys():
         winner = None
         for i in range(epochCnt):
@@ -53,12 +53,17 @@ if __name__ == '__main__':
                 winner = neuronGroup.train_without_supervisor(testInputMap[key])
             else:
                 winner = neuronGroup.train_without_supervisor(testInputMap[key])
-        winners.append((key, winner))
+        winnersTrain.append((key, winner))
     
+    winners = {}
+    for key in testInputMap.keys():
+        winners[key] = neuronGroup.guess(testInputMap[key])
+
+
     winnersNoised = {}
     for key in noisedInputMap.keys():
         winnersNoised[key] = neuronGroup.guess(noisedInputMap[key])
     
-    for key, winner in winners:
-        print(key, "\t", winner._iid, "\t", winnersNoised[key]._iid)
+    for key, winner in winnersTrain:
+        print(key, "\t", winner._iid, "\t", winners[key]._iid, "\t", winnersNoised[key]._iid)
     
