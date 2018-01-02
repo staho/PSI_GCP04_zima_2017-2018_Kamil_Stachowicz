@@ -1,11 +1,12 @@
-
+"""Klasa z emoji (wejsciami)"""
 class TestInput():
-    avaliableEmojis = ["sad","D","wrr","xD", "|"]
+    avaliableEmojis = ["sad","D","wrr","xD", "|"]   #lista dostepnych emoji w danych
 
     def __init__(self):
         self.inputsMap = {}
         self.makeInputs()
 
+    """Wszystkie emoji w formie binarnej"""
     def makeInputs(self):
         for emoji in TestInput.avaliableEmojis:
             if emoji == "|":
@@ -63,5 +64,5 @@ class TestInput():
                     0,0,1,1,1,1,0,0,
                     0,0,0,0,0,0,0,0,
                     ]
-    def getInputsMap(self):
+    def getInputsMap(self): #zwrocenie danych jako mapy
         return self.inputsMap
