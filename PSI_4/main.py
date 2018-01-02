@@ -1,69 +1,73 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 from HebbGroup import *
 from testinput import *
 from signsigm import *
 import numpy as np
 import copy
 
+"""Funkcja drukująca emoji na ekran"""
 def drawEmoji(emoji):
     for i in range(8):
         for j in range(8):
             print(' ' if emoji[i*8+j] == -1 or emoji[i*8+j] == 0 else 'x', end=' ', flush=True)
         print("\n")
 
+"""Funkcja zaszumiająca losowe piksele w emoji"""
 def noiseEmoji(emoji, numOfNoisePixels):
-    
     noisedEmoji = copy.deepcopy(emoji)
     pixels = np.random.choice(64, numOfNoisePixels, replace=False)
     for pixel in pixels:
-        noisedEmoji[pixel] *= -1
+        if noisedEmoji[pixel] == 1:
+            noisedEmoji[pixel] = 0
+        else:
+            noisedEmoji[pixel] = 1
 
     return noisedEmoji
             
 
 if __name__ == '__main__':
-    learning_rate = 0.1
-    forget_rate = 0.04
-    num_of_neurons = 16
-    activation_function = Linear()()
-
-
-    testInput = TestInput()
+    #ustawienie parametrów sieci i uczenia
+    no_of_inputs = 64
+    learning_rate = 0.008 
+    forget_rate = 0.25
+    num_of_neurons = 30
+    epochCnt = 400
+    
+    
+    activation_function = Linear()()    #ustawienie funkcji aktywacji dla neuronów
+    testInput = TestInput()             #wygenerowanie danych do uczenia
     testInputMap = testInput.getInputsMap()
     noisedInputMap = {}
     
-    for key in testInputMap.keys():
-        noisedInputMap[key] = noiseEmoji(testInputMap[key], 1)
+    for key in testInputMap.keys():     #stworzenie zaszumionych emotikon do testów
+        noisedInputMap[key] = noiseEmoji(testInputMap[key], 3)
 
-    for key in testInputMap.keys():
+    for key in testInputMap.keys():     #wydruk emoji
         print(str(key))
         drawEmoji(testInputMap[key])
         print("NOISED:")
         drawEmoji(noisedInputMap[key])
-    
-    epochCnt = 1000
-    neuronGroup = HebbGroup(learning_rate, num_of_neurons, 64, forget_rate, activation_function)
 
-    winnersTrain = []
-    for key in testInputMap.keys():
-        winner = None
-        for i in range(epochCnt):
-            if winner == None:
-                winner = neuronGroup.train_without_supervisor(testInputMap[key])
-            else:
-                winner = neuronGroup.train_without_supervisor(testInputMap[key])
-        winnersTrain.append((key, winner))
-    
+    #stworzenie struktury sieci Hebba
+    neuronGroup = HebbGroup(learning_rate, num_of_neurons, no_of_inputs, forget_rate, activation_function)
+
+    #uczenie sieci
+    for i in range(epochCnt):
+        for key in testInputMap.keys():
+            neuronGroup.train_without_supervisor(testInputMap[key])
+
+    #sprawdzenie sieci
     winners = {}
     for key in testInputMap.keys():
         winners[key] = neuronGroup.guess(testInputMap[key])
 
-
+    #sprawdzenie sieci zaszumionymi emoji
     winnersNoised = {}
     for key in noisedInputMap.keys():
         winnersNoised[key] = neuronGroup.guess(noisedInputMap[key])
-    
-    for key, winner in winnersTrain:
-        print(key, "\t", winner._iid, "\t", winners[key]._iid, "\t", winnersNoised[key]._iid)
+
+    #wydruki końcowe
+    print("Emoji", "\t", "Norm", "\t", "Noised")
+    print("-----------------------")
+    for key, winner in winners.items():
+        print(key, "\t", winner._iid, "\t", winnersNoised[key]._iid)
     

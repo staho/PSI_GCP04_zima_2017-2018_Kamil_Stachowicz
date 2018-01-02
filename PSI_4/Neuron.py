@@ -10,16 +10,18 @@ class Neuron:
         self.__dict__['_inputs'] = []
         self.__dict__['_learningRate'] = learning_rate
         self.__dict__['_activationFunction'] = activation_function
-        self.__dict__['_bias'] = -0.5
+        self.__dict__['_bias'] = 1
         self.__dict__['_forgetRate'] = forgetRate
         self.__dict__['_sum'] = None
         self.__dict__['_error'] = None
         self.__dict__['_startingWeights'] = []
         self.__dict__['_val'] = 0
         self.__dict__['_iid'] = iid
+        self.__dict__['_forget'] = 1 - forgetRate
+        self.__dict__['_in_row_winner'] = -1
 
         for weight in range(0, self._no_of_inputs):
-            self._weights.append(np.random.uniform(-1, 1))
+            self._weights.append(np.random.uniform(0, 1))
         if self._forgetRate == None:
             self._forgetRate = 0
 
@@ -43,9 +45,9 @@ class Neuron:
         output = self.guess(inputs)
 
         constant = self._learningRate * output
-        forget = (1-self._forgetRate)
+        #forget = (1-self._forgetRate)
         for i in range(len(self._inputs)):           
-            self._weights[i] *= forget
+            self._weights[i] *= self._forget
             self._weights[i] += constant * self._inputs[i]
         
         return output
