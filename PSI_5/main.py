@@ -3,33 +3,55 @@ from Inputs import *
 from NeuronKohonen import *
 
 if __name__ == '__main__':
-    inputs = Inputs()
-    
-    specie = inputs.getInputData(0)[0]
-    specie1 = inputs.getInputData(1)[0]
-    specie2 = inputs.getInputData(2)[0]
-    
-    learningRate = 0.001
+    #ustawienia i parametry sieci neuronowej
+    learningRate = 1
     noOfInputs = 4
+    width = 20
+    height = 20
+
+    inputs = Inputs()   #utworzenie danych wejściowych
     
-    grid = Grid(noOfInputs, learningRate, 20, 20)
+    """Przypisanie danych róznych kwiatow to zmiennych"""
+    species = {}
+    for i in range(3):
+        species[inputs.getInputData(i)[0]] = inputs.getInputData(i)[1]
+    
+    #zainicjalizowanie siatki neuronów Kohonena WTA
+    grid = Grid(noOfInputs, learningRate, width, height)
 
-    winner = [None, None, None]
+    #tablica zwycięzców Kohonena
+    winner = {}
 
-    for j in range(3):
-        for i in range(1000):
-            winner[j] = grid.train(inputs.getInputData(j)[1])
-        grid.resetNeurons()
+    #wśród wszystkich neuronów w siatce odnajdywany jest zwycięzca
+    for i in range(100):
+        for j in range(len(species["Iris-setosa"])):
+            for key in species.keys():
+                winner[key] = grid.train(species[key][j])
 
-    print(specie + " " + winner[0].getWeightsAsString())
-    print(specie1 + " " + winner[1].getWeightsAsString())
-    print(specie2 + " " + winner[2].getWeightsAsString())
+    for key, value in winner.items():
+        print(key + " " + value.getWeightsAsString())
 
+    testData = {}
+    for i in range(3):
+        testData[inputs.getTestData(i)[0]] = inputs.getTestData(i)[1]
+
+    #sprawdzanie jak wiele z danych testowych zostanie poprawnie odgadnięte
+    matched = 0
+    winnerTest = {}
+    for key, value in testData.items():
+        for j in range(len(testData["Iris-setosa"])):
+            winnerTest[key] = grid.guess(value[j])
+            if winnerTest[key] == winner[key]:
+                matched += 1
+
+    print(matched)
+    """średnie z danych wejściowych"""
     #averages:
     #Iris-setosa [5.01, 3.42, 1.47, 0.25]
     #Iris-versicolor [5.94, 2.78, 4.26, 1.33]
     #Iris-virginica [6.59, 2.98, 5.56, 2.03]
 
+    """średnie z danych znormalizowanych"""
     #averages:
     #[0.81, 0.55, 0.24, 0.04]
     #[0.75, 0.35, 0.54, 0.17]

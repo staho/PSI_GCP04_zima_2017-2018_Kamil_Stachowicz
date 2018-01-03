@@ -5,8 +5,10 @@ import math
 class Inputs:
     def __init__(self):
         self.__dict__['_inputs'] = {}
+        self.__dict__['_testInputs'] = {}
         self.__dict__['_species'] = None
         self._pathToData = './irisdata.txt'
+        self._pathToTestData = './irisdataTest.txt'
         self._avgMap = {}
         
         self.readData()
@@ -23,6 +25,14 @@ class Inputs:
                 self._inputs[line[4]].append(self.normalize([float(i) for i in line[0:4]]))
         
         self._species = list(self._inputs.keys())
+
+        with open(self._pathToTestData) as f:
+            for line in f:
+                line = line.strip()
+                line = line.split(',')
+                if line[4] is not self._inputs:
+                    self._testInputs.setdefault(line[4], []) 
+                self._testInputs[line[4]].append(self.normalize([float(i) for i in line[0:4]]))
       
         self.averages()
 
@@ -30,8 +40,15 @@ class Inputs:
         if specie > -1 and specie < len(self._species):
             specieName = self._species[specie]
 
-            index = random.randint(0, len(self._inputs[specieName]) - 1)
-            return (specieName, self._inputs[specieName][index])
+            return (specieName, self._inputs[specieName])
+        else:
+            return None
+    
+    def getTestData(self, specie):
+        if specie > -1 and specie < len(self._species):
+            specieName = self._species[specie]
+
+            return (specieName, self._testInputs[specieName])
         else:
             return None
     

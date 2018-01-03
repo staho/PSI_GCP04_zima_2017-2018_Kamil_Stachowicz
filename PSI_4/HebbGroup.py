@@ -12,23 +12,24 @@ class HebbGroup:
     """Funkcja trenowania bez nauczyciela"""
     def train_without_supervisor(self, inputs):
         winner = self._neurons[0]
-        for neuron in self._neurons:
+        for neuron in self._neurons:    #wyszukanie neuronu o najwyzszym wyjsciu dla danego zestawu
             temp_winner = neuron
             neuron.guess(inputs)
             if temp_winner._val > winner._val:
-                winner = temp_winner
+                winner = temp_winner    #znalezenie neuronu 
             
-        winner.trainWithoutSupervisor(inputs) 
+        winner.trainWithoutSupervisor(inputs)   #aktualizacja wag neuronu
         return winner
+
     """Funkcja odgadywania"""
     def guess(self, inputs):
-        winner = None
+        winner = None       #wyszukanie neuronu o najwyzszym wyjsciu dla danego zestawu
         for neuron in self._neurons:
             temp_winner = neuron
-            neuron.guess(inputs)
+            neuron.guess(inputs)s
             if winner == None:
                 winner = neuron
             elif temp_winner._val > winner._val:
                 winner = temp_winner
         
-        return winner
+        return winner   #zwrócenie neuronu o najwyzszym wyjsciu
