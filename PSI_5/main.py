@@ -4,7 +4,8 @@ from NeuronKohonen import *
 
 if __name__ == '__main__':
     #ustawienia i parametry sieci neuronowej
-    learningRate = 1
+    learningRate = 0.1
+    epoch = 100
     noOfInputs = 4
     width = 20
     height = 20
@@ -23,13 +24,15 @@ if __name__ == '__main__':
     winner = {}
 
     #wśród wszystkich neuronów w siatce odnajdywany jest zwycięzca
-    for i in range(100):
+    for i in range(epoch):
         for j in range(len(species["Iris-setosa"])):
             for key in species.keys():
                 winner[key] = grid.train(species[key][j])
 
     for key, value in winner.items():
-        print(key + " " + value.getWeightsAsString())
+        print(key)
+        for val in value.getWeightsAsString().replace('[','').replace(']','').split(', '):
+            print(val)
 
     testData = {}
     for i in range(3):
