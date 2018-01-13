@@ -57,3 +57,6 @@ class NeuronKohonen:
 
     def getY(self):
         return self._y
+
+    def getNeuronString(self):
+        return "x: " + str(self._x) + " y: " + str(self._y)

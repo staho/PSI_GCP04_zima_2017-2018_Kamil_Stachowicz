@@ -16,8 +16,8 @@ class HebbGroup:
             temp_winner = neuron
             neuron.guess(inputs)
             if temp_winner._val > winner._val:
-                winner = temp_winner    #znalezenie neuronu 
-            
+                winner = temp_winner    #znalezenie neuronu
+
         winner.trainWithoutSupervisor(inputs)   #aktualizacja wag neuronu
         return winner
 
@@ -26,10 +26,10 @@ class HebbGroup:
         winner = None       #wyszukanie neuronu o najwyzszym wyjsciu dla danego zestawu
         for neuron in self._neurons:
             temp_winner = neuron
-            neuron.guess(inputs)s
+            neuron.guess(inputs)
             if winner == None:
                 winner = neuron
             elif temp_winner._val > winner._val:
                 winner = temp_winner
-        
+
         return winner   #zwrócenie neuronu o najwyzszym wyjsciu

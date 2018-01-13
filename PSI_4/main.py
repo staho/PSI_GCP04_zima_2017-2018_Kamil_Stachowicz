@@ -8,7 +8,7 @@ import copy
 def drawEmoji(emoji):
     for i in range(8):
         for j in range(8):
-            print(' ' if emoji[i*8+j] == -1 or emoji[i*8+j] == 0 else 'x', end=' ', flush=True)
+            print('⬛️' if emoji[i*8+j] == -1 or emoji[i*8+j] == 0 else '⬜️', end=' ', flush=True)
         print("\n")
 
 """Funkcja zaszumiająca losowe piksele w emoji"""
@@ -22,22 +22,22 @@ def noiseEmoji(emoji, numOfNoisePixels):
             noisedEmoji[pixel] = 1
 
     return noisedEmoji
-            
+
 
 if __name__ == '__main__':
     #ustawienie parametrów sieci i uczenia
     no_of_inputs = 64
-    learning_rate = 0.008 
+    learning_rate = 0.008
     forget_rate = 0.25
     num_of_neurons = 30
     epochCnt = 400
-    
-    
+
+
     activation_function = Linear()()    #ustawienie funkcji aktywacji dla neuronów
     testInput = TestInput()             #wygenerowanie danych do uczenia
     testInputMap = testInput.getInputsMap()
     noisedInputMap = {}
-    
+
     for key in testInputMap.keys():     #stworzenie zaszumionych emotikon do testów
         noisedInputMap[key] = noiseEmoji(testInputMap[key], 3)
 
@@ -70,4 +70,3 @@ if __name__ == '__main__':
     print("-----------------------")
     for key, winner in winners.items():
         print(key, "\t", winner._iid, "\t", winnersNoised[key]._iid)
-    

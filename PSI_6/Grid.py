@@ -1,5 +1,5 @@
 from NeuronKohonen import *
-import sys.path
+import sys
 import math
 
 sys.path.append('../functions')
