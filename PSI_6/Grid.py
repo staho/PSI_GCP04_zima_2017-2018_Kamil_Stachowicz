@@ -9,17 +9,20 @@ from ActivationFunctions import *
 """Klasa sieci Kohonena"""
 class Grid:
     """Klasa tworząca neurony i ustawiająca parametry sieci"""
-    def __init__(self, noOfInputs, learningRate, height, width, nbRay):
+    def __init__(self, noOfInputs, learningRate, height, width, nbMaxRay, nbMinRay, epochs):
         self.__dict__['_noOfInputs'] = noOfInputs
         self.__dict__['_learningRate'] = learningRate
         self.__dict__['_height'] = height
         self.__dict__['_width'] = width
         self.__dict__['_neurons'] = [[NeuronKohonen(self._learningRate, self._noOfInputs, x, y) for x in range(self._width)] for y in range(self._height) ]
-        self.__dict__['_neighbourhoodRay'] = nbRay
-        self.__dict__['_gaussDivisor'] = 2 * nbRay**2
+        self.__dict__['_neighbourhoodMaxRay'] = nbMaxRay
+        self.__dict__['_neighbourhoodMinRay'] = nbMinRay
+        self.__dict__['_epochs'] = epochs
+        self.__dict__['_gaussDivisor'] = 2 * nbMaxRay**2
+        self.__dict__['_currentRay'] = nbMaxRay
 
     """Funkcja trenowania sieci"""
-    def train(self, inputs):
+    def train(self, inputs, currEpoch):
         winner = self.guess(inputs)
 
         for i in range(self._height):
@@ -28,6 +31,7 @@ class Grid:
                 g = self.gaussNeighbourhood(winner=winner, neighbour=tempNeuron)
                 tempNeuron.trainGauss(g)
 
+        self.calculateRay(currEpoch)
         return winner
 
     """Funkcja wyłaniająca najsilniejszy neuron"""
@@ -55,3 +59,8 @@ class Grid:
         dy = winner.getY() - neighbour.getY()
 
         return math.exp(-(dx**2 + dy**2)/self._gaussDivisor)
+
+    """Funkcja zmnieniająca promień sąsiedztwa"""
+    def calculateRay(self, epoch):
+        self._currentRay = self._neighbourhoodMaxRay * (self._neighbourhoodMinRay/self._neighbourhoodMaxRay)**(epoch/self._epochs)
+        self._gaussDivisor = 2 * self._currentRay ** 2

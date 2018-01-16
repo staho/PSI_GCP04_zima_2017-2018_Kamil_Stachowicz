@@ -60,3 +60,6 @@ class NeuronKohonen:
 
     def getNeuronString(self):
         return "x: " + str(self._x) + " y: " + str(self._y)
+
+    def getDistanceToOther(self, other):
+        return math.sqrt((self._x-other.getX())**2 + (self._y - other.getY())**2)
