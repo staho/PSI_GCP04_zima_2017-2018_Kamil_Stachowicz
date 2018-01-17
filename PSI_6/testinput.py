@@ -14,7 +14,7 @@ class TestInput():
 
         self.getLetter()
 
-
+    """Stworzenie danych wejściowych"""
     def getLetter(self):
         self._testArguments['A'] = [0,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1]
         self._testArguments['B'] = [1,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,1,1,1,0]
@@ -43,6 +43,7 @@ class TestInput():
         self._testArguments['Y'] = [1,0,0,0,1,1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0]
         self._testArguments['Z'] = [1,1,1,1,1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,1,1,1,1]
 
+    """Zaszumienie danych wejściowych"""
     def getNoisedLetters(self, noOfNoised):
         testArgumentsCopy = copy.deepcopy(self._testArguments)
 

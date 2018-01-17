@@ -52,6 +52,10 @@ class NeuronKohonen:
         for weight in self._weightsStart:
             self._weights.append(weight)
 
+    """Funkcja odleglosci pomiedzy neuronami"""
+    def getDistanceToOther(self, other):
+        return math.sqrt((self._x-other.getX())**2 + (self._y - other.getY())**2)
+
     def getX(self):
         return self._x
 
@@ -60,6 +64,3 @@ class NeuronKohonen:
 
     def getNeuronString(self):
         return "x: " + str(self._x) + " y: " + str(self._y)
-
-    def getDistanceToOther(self, other):
-        return math.sqrt((self._x-other.getX())**2 + (self._y - other.getY())**2)

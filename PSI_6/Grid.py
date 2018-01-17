@@ -29,7 +29,8 @@ class Grid:
             for j in range(self._width):
                 tempNeuron = self._neurons[i][j]
                 g = self.gaussNeighbourhood(winner=winner, neighbour=tempNeuron)
-                tempNeuron.trainGauss(g)
+                tempNeuron.trainGauss(g)    #za każdym razem uczone są wszystkie neurony
+                                            #uwzględniając odpowiedni współczynnik G
 
         self.calculateRay(currEpoch)
         return winner
